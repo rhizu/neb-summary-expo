@@ -1,0 +1,33 @@
+{
+  "class11EnglishChapters": [
+    {
+      "name": "1",
+      "note": "Hi this is chapter 1 notes.",
+      "id": "4c70ecfd-9cb5-4f2d-ab2d-f623eb1916f5"
+    },
+    {
+      "name": "2",
+      "note": "Hi this is chapter 2 notes.",
+      "id": "8c8d9651-6da0-4575-89ac-bdc24f624927"
+    },
+    {
+      "name": "3",
+      "note": "",
+      "id": "e70b81d3-7c63-4b22-a168-c99c4c57f60e"
+    }
+  ],
+  "class11NepaliChapters": [
+    {
+      "name": "nepali1",
+      "note": "1st nepali chapter notes of 11",
+      "id": "4bb02ea4-0db9-4bbd-8ec1-3a2ab1d64ae3"
+    },
+    {
+      "name": "nepali2",
+      "note": "2nd nepali chapter notes of 11",
+      "id": "d28dc169-8566-4e81-8f22-b035f7770780"
+    }
+  ],
+  "class12EnglishChapters": [],
+  "class12NepaliChapters": []
+}
