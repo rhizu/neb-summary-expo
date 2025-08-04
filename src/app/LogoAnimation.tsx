@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
 import Animated, {
   runOnJS,
@@ -18,7 +18,9 @@ type LogoAnimationProps = {
   onFinish?: () => void;
 };
 
-export default function LogoAnimation({ onFinish }: LogoAnimationProps) {
+export default function LogoAnimation({
+  onFinish,
+}: LogoAnimationProps) {
   // Separate shared values for each part
   const leftX = useSharedValue(width + 100); // LeftPart
   const rightX = useSharedValue(width + 100); // RightPart
@@ -42,23 +44,36 @@ export default function LogoAnimation({ onFinish }: LogoAnimationProps) {
       // Final small upward move for polish
       leftY.value = withTiming(leftY.value - 20, { duration: 400 });
       rightY.value = withTiming(rightY.value - 20, { duration: 400 });
-      centerY.value = withTiming(centerY.value - 40, { duration: 400 }, () => {
-        if (onFinish) runOnJS(onFinish)();
-      });
+      centerY.value = withTiming(
+        centerY.value - 40,
+        { duration: 400 },
+        () => {
+          if (onFinish) runOnJS(onFinish)();
+        }
+      );
     });
   }, []);
 
   // Animated styles
   const leftStyle = useAnimatedStyle(() => ({
-    transform: [{ translateX: leftX.value }, { translateY: leftY.value }],
+    transform: [
+      { translateX: leftX.value },
+      { translateY: leftY.value },
+    ],
   }));
 
   const rightStyle = useAnimatedStyle(() => ({
-    transform: [{ translateX: rightX.value }, { translateY: rightY.value }],
+    transform: [
+      { translateX: rightX.value },
+      { translateY: rightY.value },
+    ],
   }));
 
   const centerStyle = useAnimatedStyle(() => ({
-    transform: [{ translateX: centerX.value }, { translateY: centerY.value }],
+    transform: [
+      { translateX: centerX.value },
+      { translateY: centerY.value },
+    ],
   }));
 
   return (

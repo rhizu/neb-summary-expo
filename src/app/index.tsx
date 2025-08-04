@@ -1,9 +1,8 @@
 import { useLocalSearchParams, useRouter } from "expo-router";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Animated,
   Dimensions,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
@@ -19,7 +18,9 @@ export default function Home() {
   const { switchGrade } = useLocalSearchParams();
 
   const slideAnim = useRef(new Animated.Value(SCREEN_HEIGHT)).current;
-  const [selectedGrade, setSelectedGrade] = useState<string | null>(null);
+  const [selectedGrade, setSelectedGrade] = useState<string | null>(
+    null
+  );
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -50,43 +51,59 @@ export default function Home() {
   };
 
   return (
-    <View style={styles.container}>
+    <View className="flex-1 bg-[#005198] items-center justify-center">
       {/* Logo Animation */}
       <LogoAnimation onFinish={() => setShowModal(true)} />
 
       {/* Bottom Sheet */}
       {showModal && (
-        <Animated.View style={[styles.bottomSheet, { top: slideAnim }]}>
+        <Animated.View
+          style={{
+            top: slideAnim,
+            left: 0,
+            right: 0,
+            height: SCREEN_HEIGHT * 0.7,
+          }}
+          className="absolute bg-white rounded-t-2xl p-6 shadow-lg"
+        >
           {!selectedGrade ? (
             <>
-              <Text style={styles.sheetTitle}>Select Grade</Text>
+              <Text className="text-xl font-bold text-center mb-4">
+                Select Grade
+              </Text>
               <TouchableOpacity
                 onPress={() => handleGradeSelect("11")}
-                style={styles.optionButton}
+                className="p-3 rounded-lg bg-gray-200 mb-2"
               >
-                <Text style={styles.optionText}>Grade 11</Text>
+                <Text className="text-center text-base">
+                  Grade 11
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => handleGradeSelect("12")}
-                style={styles.optionButton}
+                className="p-3 rounded-lg bg-gray-200 mb-2"
               >
-                <Text style={styles.optionText}>Grade 12</Text>
+                <Text className="text-center text-base">
+                  Grade 12
+                </Text>
               </TouchableOpacity>
             </>
           ) : (
             <>
-              <Text style={styles.sheetTitle}>Select Subject</Text>
+              <Text className="text-xl font-bold text-center mb-4">
+                Select Subject
+              </Text>
               <TouchableOpacity
                 onPress={() => handleSubjectSelect("english")}
-                style={styles.optionButton}
+                className="p-3 rounded-lg bg-gray-200 mb-2"
               >
-                <Text style={styles.optionText}>English</Text>
+                <Text className="text-center text-base">English</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => handleSubjectSelect("nepali")}
-                style={styles.optionButton}
+                className="p-3 rounded-lg bg-gray-200 mb-2"
               >
-                <Text style={styles.optionText}>Nepali</Text>
+                <Text className="text-center text-base">Nepali</Text>
               </TouchableOpacity>
             </>
           )}
@@ -95,48 +112,3 @@ export default function Home() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#005198",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  heading: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#fff",
-  },
-  bottomSheet: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    height: SCREEN_HEIGHT * 0.7,
-    backgroundColor: "#fff",
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    padding: 24,
-    elevation: 10,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-  },
-  sheetTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: 16,
-  },
-  optionButton: {
-    padding: 14,
-    borderRadius: 8,
-    backgroundColor: "#eee",
-    marginBottom: 10,
-  },
-  optionText: {
-    textAlign: "center",
-    fontSize: 16,
-  },
-});
