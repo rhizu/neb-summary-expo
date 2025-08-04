@@ -52,6 +52,21 @@ export default function RootLayout() {
         }}
       />
       <Drawer.Screen
+        name="theme"
+        options={{
+          title: "Theme",
+          drawerIcon(props) {
+            return (
+              <MaterialCommunityIcons
+                name="palette-outline"
+                size={props.size}
+                color={props.color}
+              />
+            );
+          },
+        }}
+      />
+      <Drawer.Screen
         name="privacy"
         options={{
           title: "Privacy Policy",
