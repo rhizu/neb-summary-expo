@@ -1,3 +1,4 @@
+import { useTheme } from "@react-navigation/native";
 import {
   Platform,
   Text,
@@ -5,7 +6,6 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-
 interface AppButtonProps {
   onPress: () => void;
   title: string;
@@ -27,18 +27,23 @@ export default function AppButton({
   my0,
   mt0,
 }: AppButtonProps) {
+  const { colors } = useTheme();
+
   return Platform.OS === "android" ? (
     <View
       className={`${
         my0 ? "my-0" : mt0 ? "mb-2" : "my-2"
-      } items-center justify-center overflow-hidden rounded-xl bg-[#005198] ${className} ${
+      } items-center justify-center overflow-hidden rounded-xl ${className} ${
         disabled ? "opacity-50" : ""
       }`}
-      style={style}
+      style={{ ...style, backgroundColor: colors.primary }}
     >
       <TouchableNativeFeedback
         onPress={disabled ? undefined : onPress}
-        background={TouchableNativeFeedback.Ripple("#143b5d", false)}
+        background={TouchableNativeFeedback.Ripple(
+          colors.text,
+          false
+        )}
       >
         <View pointerEvents="box-only" className={`w-full p-3`}>
           <Text
@@ -54,10 +59,10 @@ export default function AppButton({
       accessibilityRole="button"
       className={`${
         my0 ? "my-0" : mt0 ? "mt0 mb-2" : "my-2"
-      } items-center justify-center rounded-xl bg-[#005198] p-3 ${className} ${
+      } items-center justify-center rounded-xl p-3 ${className} ${
         disabled ? "opacity-50" : ""
       }`}
-      style={style}
+      style={{ ...style, backgroundColor: colors.primary }}
       onPress={disabled ? undefined : onPress}
     >
       <Text className={`text-center text-lg font-bold text-white`}>

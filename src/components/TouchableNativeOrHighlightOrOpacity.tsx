@@ -1,3 +1,4 @@
+import { useTheme } from "@react-navigation/native";
 import {
   Platform,
   TouchableHighlight,
@@ -8,7 +9,6 @@ import {
   TouchableOpacityProps,
   View,
 } from "react-native";
-
 export default function TouchableNativeOrHighlightOrOpacity({
   children,
   touchableOpacity,
@@ -24,14 +24,16 @@ export default function TouchableNativeOrHighlightOrOpacity({
   noSwipe?: boolean;
   touchableOpacity?: boolean;
 }) {
+  const { colors } = useTheme();
+
   return Platform.OS === "android" ? (
     <TouchableNativeFeedback
       {...props}
       background={
         !props.onPress
-          ? TouchableNativeFeedback.Ripple("#005198", false)
+          ? TouchableNativeFeedback.Ripple(colors.text, false)
           : TouchableNativeFeedback.Ripple(
-              underlayColor || "#0b365c",
+              underlayColor || colors.text,
               false
             )
       }
@@ -42,7 +44,7 @@ export default function TouchableNativeOrHighlightOrOpacity({
     <TouchableOpacity {...props}>{children}</TouchableOpacity>
   ) : (
     <TouchableHighlight
-      underlayColor={underlayColor || "#0b365c"}
+      underlayColor={underlayColor || colors.text}
       {...props}
     >
       {children}

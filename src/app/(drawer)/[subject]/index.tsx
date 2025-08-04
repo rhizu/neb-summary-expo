@@ -5,6 +5,7 @@ import { FlatList, Text, View } from "react-native";
 
 import TouchableNativeOrHighlightOrOpacity from "@/components/TouchableNativeOrHighlightOrOpacity";
 import { chapters, Subject, subjectToHeadingMap } from "@/lib/notes";
+import { useTheme } from "@react-navigation/native";
 import Drawer from "expo-router/drawer";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -14,6 +15,7 @@ export default function ChapterListScreen() {
   }>();
 
   const { bottom } = useSafeAreaInsets();
+  const { colors } = useTheme();
 
   const renderItem = ({
     item,
@@ -40,16 +42,16 @@ export default function ChapterListScreen() {
               <AntDesign
                 name="checkcircle"
                 size={16}
-                color="#005198"
+                color={colors.primary}
               />
             </View>
             <Text className="text-base">{item.name}</Text>
           </View>
-          <Text className="text-lg text-blue-900">
+          <Text className="text-lg" style={{ color: colors.primary }}>
             <MaterialCommunityIcons
               name="chevron-right"
               size={24}
-              color="#005198"
+              color={colors.primary}
             />
           </Text>
         </View>

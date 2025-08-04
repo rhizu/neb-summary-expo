@@ -7,6 +7,7 @@ import {
   DrawerItem,
   DrawerItemList,
 } from "@react-navigation/drawer";
+import { useTheme } from "@react-navigation/native";
 import { router } from "expo-router";
 import Drawer from "expo-router/drawer";
 import { Share, Text, View } from "react-native";
@@ -17,6 +18,7 @@ export default function RootLayout() {
       drawerContent={DrawerContent}
       screenOptions={{
         drawerType: "front",
+        headerTintColor: "#fff",
       }}
     >
       <Drawer.Screen
@@ -85,10 +87,19 @@ export default function RootLayout() {
 
 function DrawerContent(props: DrawerContentComponentProps) {
   const setGrade = usePersistedBearStore((state) => state.setGrade);
+  const { colors } = useTheme();
 
   return (
-    <>
-      <View className="pt-[41px] pb-[27px] bg-[#005198] rounded-br-[25px] justify-center items-center">
+    <View
+      className="flex-1"
+      style={{
+        backgroundColor: "white",
+      }}
+    >
+      <View
+        className="pt-[41px] pb-[27px] rounded-br-[25px] justify-center items-center"
+        style={{ backgroundColor: colors.primary }}
+      >
         <View className="flex-row items-center justify-center gap-2.5">
           <Logo width={40} height={52} />
           <Text className="font-bold text-white">NEB SUMMARY</Text>
@@ -112,7 +123,7 @@ function DrawerContent(props: DrawerContentComponentProps) {
             <MaterialCommunityIcons
               name="book-multiple-outline"
               size={size}
-              color={focused ? "#005198" : color || "black"}
+              color={focused ? colors.primary : color || "black"}
             />
           )}
         />
@@ -128,12 +139,12 @@ function DrawerContent(props: DrawerContentComponentProps) {
             <MaterialCommunityIcons
               name="share-outline"
               size={size}
-              color={focused ? "#005198" : color || "black"}
+              color={focused ? colors.primary : color || "black"}
             />
           )}
         />
       </DrawerContentScrollView>
-    </>
+    </View>
   );
 }
 // const setGrade = usePersistedBearStore((state) => state.setGrade);

@@ -1,9 +1,4 @@
 import "@/styles/global.css";
-import { Stack } from "expo-router";
-import { StatusBar } from "expo-status-bar";
-import { useColorScheme } from "react-native";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-
 import {
   BlueTheme,
   CyanTheme,
@@ -17,7 +12,12 @@ import {
   RedTheme,
   YellowTheme,
 } from "@/styles/themes";
+import { ThemeProvider } from "@react-navigation/native";
+import { Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
+import { useColorScheme } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const themeMap = {
   light: LightTheme,
@@ -47,17 +47,17 @@ export default function RootLayout() {
     | "purple"
     | "magenta"
     | "pink"
-  >("navy");
+  >("pink");
   const theme = themeMap[themeName] ?? LightTheme;
 
   return (
-    // <ThemeProvider value={theme}>
-    <>
+    <ThemeProvider value={theme}>
       <StatusBar style="light" />
       <GestureHandlerRootView style={{ flex: 1 }}>
         <Stack
           screenOptions={{
             headerShown: false,
+            headerTintColor: "#fff",
           }}
         >
           <Stack.Screen
@@ -70,7 +70,6 @@ export default function RootLayout() {
           <Stack.Screen name="notes/[chapterId]/index" />
         </Stack>
       </GestureHandlerRootView>
-    </>
-    // </ThemeProvider>
+    </ThemeProvider>
   );
 }

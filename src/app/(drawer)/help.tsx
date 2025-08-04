@@ -1,12 +1,14 @@
 import Nymnalogo from "@/assets/logo/Nymna.svg";
+import { useTheme } from "@react-navigation/native";
 import {
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
+export default function HelpScreen() {
+  const { colors } = useTheme();
 
-export default function NotePage() {
   return (
     <View className="flex flex-col flex-1 bg-gray-200">
       <View className="w-full p-5 h-full relative">
@@ -37,7 +39,12 @@ export default function NotePage() {
               placeholderTextColor="#999"
               multiline
             />
-            <TouchableOpacity className="bg-blue-700 py-3 rounded-xl items-center mt-1">
+            <TouchableOpacity
+              className="py-3 rounded-xl items-center mt-1"
+              style={{
+                backgroundColor: colors.primary,
+              }}
+            >
               <Text className="text-white text-base font-medium">
                 Send Message
               </Text>

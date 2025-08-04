@@ -2,11 +2,13 @@ import AppButton from "@/components/AppButton";
 import LogoAnimation from "@/components/LogoAnimation";
 import { Subject, subjectToHeadingMap } from "@/lib/notes";
 import { usePersistedBearStore } from "@/store";
+import { useTheme } from "@react-navigation/native";
 import { router } from "expo-router";
 import { Text, View } from "react-native";
 import Animated, { SlideInDown } from "react-native-reanimated";
 
 export default function SelectGradeAndSubjectScreen() {
+  const { colors } = useTheme();
   const grade = usePersistedBearStore((state) => state.grade);
   const setGrade = usePersistedBearStore((state) => state.setGrade);
 
@@ -31,7 +33,10 @@ export default function SelectGradeAndSubjectScreen() {
 
   return (
     <>
-      <View className="flex-1 bg-[#005198] items-center justify-center">
+      <View
+        style={{ backgroundColor: colors.primary }}
+        className="flex-1 items-center justify-center"
+      >
         <View className="flex-1" />
         <LogoAnimation />
         <Animated.View
