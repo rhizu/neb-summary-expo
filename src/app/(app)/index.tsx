@@ -1,8 +1,9 @@
+import AppButton from "@/components/AppButton";
 import LogoAnimation from "@/components/LogoAnimation";
 import { Subject, subjectToHeadingMap } from "@/lib/notes";
 import { usePersistedBearStore } from "@/store";
 import { router } from "expo-router";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, View } from "react-native";
 import Animated, { SlideInDown } from "react-native-reanimated";
 
 export default function SelectGradeAndSubjectScreen() {
@@ -41,44 +42,36 @@ export default function SelectGradeAndSubjectScreen() {
             <Text className="text-3xl font-bold text-center mb-4">
               Select Grade
             </Text>
-            <TouchableOpacity
+            <AppButton
+              title={"Grade 11"}
               onPress={() => {
                 setGrade("11");
               }}
-              className="p-3 rounded-lg bg-gray-200 mb-2"
-            >
-              <Text className="text-center text-base">Grade 11</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+            />
+            <AppButton
+              title={"Grade 12"}
               onPress={() => {
                 setGrade("12");
               }}
-              className="p-3 rounded-lg bg-gray-200 mb-2"
-            >
-              <Text className="text-center text-base">Grade 12</Text>
-            </TouchableOpacity>
+            />
           </>
         ) : (
           <>
             <Text className="text-3xl font-bold text-center mb-4">
               Select Subject
             </Text>
-            <TouchableOpacity
+            <AppButton
+              title={"English"}
               onPress={() => {
                 handleNavigateToChapters("english", grade);
               }}
-              className="p-3 rounded-lg bg-gray-200 mb-2"
-            >
-              <Text className="text-center text-base">English</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+            />
+            <AppButton
+              title={"Nepali"}
               onPress={() => {
                 handleNavigateToChapters("nepali", grade);
               }}
-              className="p-3 rounded-lg bg-gray-200 mb-2"
-            >
-              <Text className="text-center text-base">Nepali</Text>
-            </TouchableOpacity>
+            />
           </>
         )}
       </Animated.View>

@@ -1,9 +1,10 @@
 import AntDesign from "@expo/vector-icons/AntDesign";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { Link, Redirect, useLocalSearchParams } from "expo-router";
-import { FlatList, Text, TouchableOpacity, View } from "react-native";
+import { Redirect, router, useLocalSearchParams } from "expo-router";
+import { FlatList, Text, View } from "react-native";
 
 import Header from "@/components/Header";
+import TouchableNativeOrHighlightOrOpacity from "@/components/TouchableNativeOrHighlightOrOpacity";
 import { notes, Subject, subjectToHeadingMap } from "@/lib/notes";
 
 export default function ChapterListScreen() {
@@ -27,14 +28,20 @@ export default function ChapterListScreen() {
     item: (typeof chapters)[number];
   }) => (
     <>
-      <Link
-        href={{
-          pathname: "/[subject]/[chapterId]",
-          params: { subject, chapterId: item.id },
+      <TouchableNativeOrHighlightOrOpacity
+        accessibilityRole="button"
+        underlayColor={"#ddd"}
+        onPress={() => {
+          router.push({
+            pathname: "/[subject]/[chapterId]",
+            params: { subject, chapterId: item.id },
+          });
         }}
-        asChild
       >
-        <TouchableOpacity className="flex-row items-center p-6 justify-between bg-white border-gray-200">
+        <View
+          pointerEvents="box-only"
+          className="flex-row items-center p-6 justify-between"
+        >
           <View className="flex-row items-center">
             <View className="mr-4">
               <AntDesign
@@ -52,8 +59,8 @@ export default function ChapterListScreen() {
               color="#005198"
             />
           </Text>
-        </TouchableOpacity>
-      </Link>
+        </View>
+      </TouchableNativeOrHighlightOrOpacity>
       <View className="h-0.5 bg-gray-200 w-full" />
     </>
   );

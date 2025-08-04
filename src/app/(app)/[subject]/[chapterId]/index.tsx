@@ -1,11 +1,7 @@
 import { router, useLocalSearchParams } from "expo-router";
-import {
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { ScrollView, Text, View } from "react-native";
 
+import AppButton from "@/components/AppButton";
 import Header from "@/components/Header";
 import { notes, Subject, subjectToHeadingMap } from "@/lib/notes";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -64,34 +60,28 @@ export default function NotePage() {
           </View>
           <View className="flex-row gap-x-4 mt-4">
             {previousChapterId && (
-              <TouchableOpacity
-                className="bg-blue-900 py-3 rounded-lg items-center flex-1 self-center"
+              <AppButton
+                className="flex-1"
+                title={"Previous Chapter"}
                 onPress={() =>
                   router.replace({
                     pathname: "/[subject]/[chapterId]",
                     params: { subject, chapterId: previousChapterId },
                   })
                 }
-              >
-                <Text className="text-white text-base font-bold">
-                  Previous Chapter
-                </Text>
-              </TouchableOpacity>
+              />
             )}
             {nextChapterId && (
-              <TouchableOpacity
-                className="bg-blue-900 py-3 rounded-lg items-center flex-1 self-center"
+              <AppButton
+                className="flex-1"
+                title={"Next Chapter"}
                 onPress={() =>
                   router.replace({
                     pathname: "/[subject]/[chapterId]",
                     params: { subject, chapterId: nextChapterId },
                   })
                 }
-              >
-                <Text className="text-white text-base font-bold">
-                  Next Chapter
-                </Text>
-              </TouchableOpacity>
+              />
             )}
           </View>
         </View>
