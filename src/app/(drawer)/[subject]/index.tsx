@@ -1,26 +1,19 @@
 import AntDesign from "@expo/vector-icons/AntDesign";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { Redirect, router, useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { FlatList, Text, View } from "react-native";
 
-import Header from "@/components/Header";
 import TouchableNativeOrHighlightOrOpacity from "@/components/TouchableNativeOrHighlightOrOpacity";
-import { notes, Subject, subjectToHeadingMap } from "@/lib/notes";
+import { chapters, Subject, subjectToHeadingMap } from "@/lib/notes";
+import Drawer from "expo-router/drawer";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function ChapterListScreen() {
   const { subject } = useLocalSearchParams<{
     subject: Subject;
   }>();
 
-  if (!subject) {
-    return <Redirect href=".." />;
-  }
-
-  const chapters = notes[subject];
-
-  if (!chapters) {
-    return <Redirect href=".." />;
-  }
+  const { bottom } = useSafeAreaInsets();
 
   const renderItem = ({
     item,
@@ -33,8 +26,8 @@ export default function ChapterListScreen() {
         underlayColor={"#ddd"}
         onPress={() => {
           router.push({
-            pathname: "/[subject]/[chapterId]",
-            params: { subject, chapterId: item.id },
+            pathname: "/notes/[chapterId]",
+            params: { chapterId: item.id },
           });
         }}
       >
@@ -66,17 +59,29 @@ export default function ChapterListScreen() {
   );
 
   return (
-    <View className="flex-1 bg-white">
-      <Header title={subjectToHeadingMap[subject].name} />
-      <View className="flex-1 flex-row justify-between">
-        <FlatList
-          className="flex-1"
-          data={chapters}
-          keyExtractor={(item) => item.id}
-          contentContainerStyle={{ paddingTop: 16 }}
-          renderItem={renderItem}
-        />
+    <>
+      <Drawer.Screen
+        options={{
+          title: subjectToHeadingMap[subject].name,
+        }}
+      />
+      <View className="flex-1 bg-white">
+        <View className="flex-1 flex-row justify-between">
+          <FlatList
+            className="flex-1"
+            data={chapters.filter((chapter) => {
+              return (
+                chapter.subject ===
+                  subjectToHeadingMap[subject].subject &&
+                chapter.grade === subjectToHeadingMap[subject].grade
+              );
+            })}
+            keyExtractor={(item) => item.id}
+            contentContainerStyle={{ paddingBottom: bottom }}
+            renderItem={renderItem}
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 }

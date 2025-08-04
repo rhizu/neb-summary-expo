@@ -1,11 +1,9 @@
 import Nymnalogo from "@/assets/logo/Nymna.svg";
-import Header from "@/components/Header";
 import { ScrollView, Text, View } from "react-native";
 
 export default function NotePage() {
   return (
     <View className="flex flex-col flex-1 bg-gray-200">
-      <Header title="Privacy Policy" />
       <View className="w-full p-5 h-full">
         <View className="p-2 bg-white rounded-xl h-1/2 w-full overflow-hidden">
           <ScrollView contentContainerStyle={{ flexGrow: 1 }}>

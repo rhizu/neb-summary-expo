@@ -1,5 +1,4 @@
 import Nymnalogo from "@/assets/logo/Nymna.svg";
-import Header from "@/components/Header";
 import {
   Text,
   TextInput,
@@ -10,7 +9,6 @@ import {
 export default function NotePage() {
   return (
     <View className="flex flex-col flex-1 bg-gray-200">
-      <Header title="Help and Support" />
       <View className="w-full p-5 h-full relative">
         <View className="p-2 bg-white rounded-xl h-3/5 w-full overflow-hidden">
           <View className="p-5 bg-white flex-1">

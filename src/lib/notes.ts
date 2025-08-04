@@ -25,10 +25,29 @@ export const subjectToHeadingMap = {
 
 export type Subject = keyof typeof subjectToHeadingMap;
 
-export const notes = notesDataJSON as {
-  [key: string]: {
+export const chapters = (
+  Object.entries(notesDataJSON) as [
+    Subject,
+    { id: string; name: string; note: string }[],
+  ][]
+).reduce(
+  (acc, [subject, chapters]) => {
+    acc.push(
+      ...chapters.map((chapter) => ({
+        id: chapter.id,
+        name: chapter.name,
+        note: chapter.note,
+        subject: subjectToHeadingMap[subject].subject,
+        grade: subjectToHeadingMap[subject].grade,
+      }))
+    );
+    return acc;
+  },
+  [] as {
     id: string;
     name: string;
     note: string;
-  }[];
-};
+    grade: "11" | "12";
+    subject: "english" | "nepali";
+  }[]
+);
