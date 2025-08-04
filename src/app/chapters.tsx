@@ -3,7 +3,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
 import { Link, router } from "expo-router";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   FlatList,
   StyleSheet,
