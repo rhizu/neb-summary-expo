@@ -1,21 +1,58 @@
 import "@/styles/global.css";
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useColorScheme } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
+import {
+  BlueTheme,
+  CyanTheme,
+  DarkThemeCustom,
+  GreenTheme,
+  LightTheme,
+  MagentaTheme,
+  NavyTheme,
+  PinkTheme,
+  PurpleTheme,
+  RedTheme,
+  YellowTheme,
+} from "@/styles/themes";
+import { useState } from "react";
+
+const themeMap = {
+  light: LightTheme,
+  dark: DarkThemeCustom,
+  red: RedTheme,
+  yellow: YellowTheme,
+  green: GreenTheme,
+  cyan: CyanTheme,
+  blue: BlueTheme,
+  navy: NavyTheme,
+  purple: PurpleTheme,
+  magenta: MagentaTheme,
+  pink: PinkTheme,
+};
+
 export default function RootLayout() {
-  const scheme = useColorScheme(); // light or dark
+  const systemScheme = useColorScheme(); // 'light' | 'dark'
+  const [themeName, setThemeName] = useState<
+    | "light"
+    | "dark"
+    | "red"
+    | "yellow"
+    | "green"
+    | "cyan"
+    | "blue"
+    | "navy"
+    | "purple"
+    | "magenta"
+    | "pink"
+  >("navy");
+  const theme = themeMap[themeName] ?? LightTheme;
 
   return (
-    <ThemeProvider
-      value={scheme === "dark" ? DarkTheme : DefaultTheme}
-    >
+    // <ThemeProvider value={theme}>
+    <>
       <StatusBar style="light" />
       <GestureHandlerRootView style={{ flex: 1 }}>
         <Stack
@@ -33,6 +70,7 @@ export default function RootLayout() {
           <Stack.Screen name="notes/[chapterId]/index" />
         </Stack>
       </GestureHandlerRootView>
-    </ThemeProvider>
+    </>
+    // </ThemeProvider>
   );
 }
