@@ -1,5 +1,5 @@
 import { router } from "expo-router";
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Dimensions,
   ScrollView,
@@ -14,7 +14,7 @@ import Sidebar from "./Sidebar";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
 
-import Nymnalogo from "../assets/logo/Nymna.svg";
+import Nymnalogo from "@/assets/logo/Nymna.svg";
 
 const screenHeight = Dimensions.get("window").height;
 
@@ -45,19 +45,22 @@ export default function NotePage() {
             <Text style={{ fontWeight: "bold" }}>NEB SUMMARY</Text>
             <View>
               <Text style={{ textAlign: "left" }}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Id
-                explicabo debitis quisquam quia maiores corrupti dignissimos,
-                aliquid voluptatem, voluptas possimus autem. Consequuntur,
-                dolore? Tempora adipisci necessitatibus nihil! Vitae facere
-                soluta assumenda harum dolorem accusantium a perspiciatis
-                aliquid tenetur illo fugit reprehenderit corporis maiores, earum
-                error iure in! Vel possimus, ad fugiat expedita corporis ex
-                excepturi doloribus praesentium aliquid sint, officia unde,
-                similique iste dignissimos voluptatem itaque illum? Voluptatem
-                delectus laboriosam perferendis debitis soluta vel laudantium a
-                quidem atque quia dignissimos, ipsa ad aut ut labore! Adipisci,
-                repudiandae hic officiis animi deleniti amet quisquam blanditiis
-                neque harum illum, voluptatem possimus! Consequatur?
+                Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. Id explicabo debitis quisquam quia maiores
+                corrupti dignissimos, aliquid voluptatem, voluptas
+                possimus autem. Consequuntur, dolore? Tempora adipisci
+                necessitatibus nihil! Vitae facere soluta assumenda
+                harum dolorem accusantium a perspiciatis aliquid
+                tenetur illo fugit reprehenderit corporis maiores,
+                earum error iure in! Vel possimus, ad fugiat expedita
+                corporis ex excepturi doloribus praesentium aliquid
+                sint, officia unde, similique iste dignissimos
+                voluptatem itaque illum? Voluptatem delectus
+                laboriosam perferendis debitis soluta vel laudantium a
+                quidem atque quia dignissimos, ipsa ad aut ut labore!
+                Adipisci, repudiandae hic officiis animi deleniti amet
+                quisquam blanditiis neque harum illum, voluptatem
+                possimus! Consequatur?
               </Text>
             </View>
           </ScrollView>
