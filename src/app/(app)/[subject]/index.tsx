@@ -34,7 +34,7 @@ export default function ChapterListScreen() {
         }}
         asChild
       >
-        <TouchableOpacity className="flex-row items-center justify-between bg-white p-4 border-gray-200">
+        <TouchableOpacity className="flex-row items-center p-6 justify-between bg-white border-gray-200">
           <View className="flex-row items-center">
             <View className="mr-4">
               <AntDesign
@@ -61,8 +61,9 @@ export default function ChapterListScreen() {
   return (
     <View className="flex-1 bg-white">
       <Header title={subjectToHeadingMap[subject].name} />
-      <View className="w-full px-5 flex-row justify-between">
+      <View className="flex-1 flex-row justify-between">
         <FlatList
+          className="flex-1"
           data={chapters}
           keyExtractor={(item) => item.id}
           contentContainerStyle={{ paddingTop: 16 }}
