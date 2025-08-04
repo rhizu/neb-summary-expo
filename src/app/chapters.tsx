@@ -15,7 +15,8 @@ import {
 import notesData from "../lib/notes.json";
 import Sidebar from "./Sidebar";
 
-const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+const capitalize = (s: string) =>
+  s.charAt(0).toUpperCase() + s.slice(1);
 
 const ChaptersScreen = () => {
   const { grade, subject } = useSelectionStore();
