@@ -1,4 +1,5 @@
 // components/Sidebar.tsx
+import Logo from "@/assets/logo/Logo.svg"; // optional
 import Feather from "@expo/vector-icons/Feather";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
@@ -10,13 +11,11 @@ import React, { useEffect, useRef } from "react";
 import {
   Animated,
   Dimensions,
-  Pressable,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
-import Logo from "../assets/logo/Logo.svg"; // optional
 
 const Sidebar = ({ onClose }: { onClose: () => void }) => {
   const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -45,23 +44,7 @@ const Sidebar = ({ onClose }: { onClose: () => void }) => {
 
   return (
     <View style={StyleSheet.absoluteFill}>
-      <Pressable style={styles.overlay} onPress={closeDrawer} />
-      <Animated.View
-        style={[
-          styles.drawer,
-          {
-            transform: [
-              {
-                translateX: slideAnim.interpolate({
-                  inputRange: [SCREEN_WIDTH - DRAWER_WIDTH, SCREEN_WIDTH],
-                  outputRange: [0, DRAWER_WIDTH],
-                  extrapolate: "clamp",
-                }),
-              },
-            ],
-          },
-        ]}
-      >
+      <View>
         <View style={styles.sidebarHeader}>
           <View style={styles.headerContent}>
             <Logo width={40} height={52} />
@@ -87,27 +70,48 @@ const Sidebar = ({ onClose }: { onClose: () => void }) => {
             label="Theme"
             navigateTo="/theme"
           />
-          <TouchableOpacity onPress={handleSwitch} style={styles.drawerItem}>
-            <FontAwesome6 name="arrows-rotate" size={24} color="black" />
+          <TouchableOpacity
+            onPress={handleSwitch}
+            style={styles.drawerItem}
+          >
+            <FontAwesome6
+              name="arrows-rotate"
+              size={24}
+              color="black"
+            />
             <Text style={styles.drawerText}>Switch Platform</Text>
           </TouchableOpacity>
           <DrawerItem
-            icon={<MaterialIcons name="security" size={24} color="black" />}
+            icon={
+              <MaterialIcons
+                name="security"
+                size={24}
+                color="black"
+              />
+            }
             label="Privacy Policy"
             navigateTo="/privacy"
           />
           <DrawerItem
-            icon={<FontAwesome5 name="headset" size={24} color="black" />}
+            icon={
+              <FontAwesome5 name="headset" size={24} color="black" />
+            }
             label="Help and Support"
             navigateTo="/help"
           />
           <DrawerItem
-            icon={<FontAwesome name="share-square-o" size={24} color="black" />}
+            icon={
+              <FontAwesome
+                name="share-square-o"
+                size={24}
+                color="black"
+              />
+            }
             label="Tell Your Friends"
             navigateTo="/share"
           />
         </View>
-      </Animated.View>
+      </View>
     </View>
   );
 };

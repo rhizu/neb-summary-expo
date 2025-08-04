@@ -1,44 +1,15 @@
-import AntDesign from "@expo/vector-icons/AntDesign";
-import Entypo from "@expo/vector-icons/Entypo";
-import { router } from "expo-router";
-import { useState } from "react";
-import {
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import Nymnalogo from "../assets/logo/Nymna.svg";
-import Sidebar from "./Sidebar";
+import Nymnalogo from "@/assets/logo/Nymna.svg";
+import Header from "@/components/Header";
+import { ScrollView, Text, View } from "react-native";
 
 export default function NotePage() {
-  const [isSidebarVisible, setSidebarVisible] = useState(false);
-
-  const openSidebar = () => setSidebarVisible(true);
-  const closeSidebar = () => setSidebarVisible(false);
-
   return (
     <View className="flex flex-col flex-1 bg-gray-200">
-      {/* Header */}
-      <View className="bg-blue-900 w-full h-30 rounded-b-2xl flex-row justify-between items-center px-5 pt-10 pb-5">
-        <TouchableOpacity onPress={() => router.back()}>
-          <AntDesign name="arrowleft" size={24} color="white" />
-        </TouchableOpacity>
-        <Text className="text-white text-xl font-bold">
-          Privacy Policy
-        </Text>
-        <TouchableOpacity onPress={openSidebar}>
-          <Entypo name="menu" size={24} color="white" />
-        </TouchableOpacity>
-      </View>
-      {/* Body */}
-      <View className="w-full p-5 h-full relative">
+      <Header title="Privacy Policy" />
+      <View className="w-full p-5 h-full">
         <View className="p-2 bg-white rounded-xl h-1/2 w-full overflow-hidden">
-          <ScrollView
-            contentContainerStyle={{ flexGrow: 1 }}
-            className="flex flex-col justify-center items-center p-2 gap-2"
-          >
-            <View>
+          <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+            <View className="flex flex-col justify-center items-center p-2 gap-2">
               <Text className="text-left">
                 Lorem ipsum dolor sit amet consectetur adipisicing
                 elit. Id explicabo debitis quisquam quia maiores
@@ -64,7 +35,6 @@ export default function NotePage() {
           <Nymnalogo width={100} height={100} />
         </View>
       </View>
-      {isSidebarVisible && <Sidebar onClose={closeSidebar} />}
     </View>
   );
 }

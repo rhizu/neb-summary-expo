@@ -1,42 +1,16 @@
-import AntDesign from "@expo/vector-icons/AntDesign";
-import Entypo from "@expo/vector-icons/Entypo";
-import { router } from "expo-router";
-import { useState } from "react";
+import Nymnalogo from "@/assets/logo/Nymna.svg";
+import Header from "@/components/Header";
 import {
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
-import Nymnalogo from "../assets/logo/Nymna.svg";
-import Sidebar from "./Sidebar";
 
 export default function NotePage() {
-  const [isSidebarVisible, setSidebarVisible] = useState(false);
-
-  const openSidebar = () => {
-    setSidebarVisible(true);
-  };
-
-  const closeSidebar = () => {
-    setSidebarVisible(false);
-  };
-
   return (
     <View className="flex flex-col flex-1 bg-gray-200">
-      {/* Header */}
-      <View className="bg-blue-900 w-full h-30 rounded-b-2xl flex-row justify-between items-center px-5 pt-10 pb-5">
-        <TouchableOpacity onPress={() => router.back()}>
-          <AntDesign name="arrowleft" size={24} color="white" />
-        </TouchableOpacity>
-        <Text className="text-white text-xl font-bold">
-          Help and Support
-        </Text>
-        <TouchableOpacity onPress={openSidebar}>
-          <Entypo name="menu" size={24} color="white" />
-        </TouchableOpacity>
-      </View>
-      {/* Body */}
+      <Header title="Help and Support" />
       <View className="w-full p-5 h-full relative">
         <View className="p-2 bg-white rounded-xl h-3/5 w-full overflow-hidden">
           <View className="p-5 bg-white flex-1">
@@ -76,7 +50,6 @@ export default function NotePage() {
           <Nymnalogo width={100} height={100} />
         </View>
       </View>
-      {isSidebarVisible && <Sidebar onClose={closeSidebar} />}
     </View>
   );
 }

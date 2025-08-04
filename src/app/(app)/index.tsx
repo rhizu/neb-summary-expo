@@ -1,4 +1,7 @@
-import { useLocalSearchParams, useRouter } from "expo-router";
+import LogoAnimation from "@/components/LogoAnimation";
+import { Subject, subjectToHeadingMap } from "@/lib/notes";
+import { usePersistedBearStore } from "@/store";
+import { router } from "expo-router";
 import { useEffect, useRef, useState } from "react";
 import {
   Animated,
@@ -7,20 +10,15 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { useSelectionStore } from "../store/useSelectionStore";
-import LogoAnimation from "./LogoAnimation";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 
-export default function Home() {
-  const router = useRouter();
-  const { setSelection } = useSelectionStore();
-  const { switchGrade } = useLocalSearchParams();
+export default function SelectGradeAndSubjectScreen() {
+  const grade = usePersistedBearStore((state) => state.grade);
+  const setGrade = usePersistedBearStore((state) => state.setGrade);
 
   const slideAnim = useRef(new Animated.Value(SCREEN_HEIGHT)).current;
-  const [selectedGrade, setSelectedGrade] = useState<string | null>(
-    null
-  );
+
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -33,21 +31,23 @@ export default function Home() {
     }
   }, [showModal]);
 
-  useEffect(() => {
-    if (switchGrade === "true") {
-      setSelectedGrade(null);
-    }
-  }, [switchGrade]);
+  const subjectEntries = Object.entries(subjectToHeadingMap) as [
+    Subject,
+    (typeof subjectToHeadingMap)[Subject],
+  ][];
 
-  const handleGradeSelect = (grade: string) => {
-    setSelectedGrade(grade);
-  };
-
-  const handleSubjectSelect = (subject: string) => {
-    if (selectedGrade) {
-      setSelection(selectedGrade, subject);
-      router.push("/chapters");
-    }
+  const handleNavigateToChapters = (
+    subject: (typeof subjectToHeadingMap)[Subject]["subject"],
+    grade: (typeof subjectToHeadingMap)[Subject]["grade"]
+  ) => {
+    subjectEntries.forEach(([key, value]) => {
+      if (value.grade === grade && value.subject === subject) {
+        router.push({
+          pathname: "/[subject]",
+          params: { subject: key },
+        });
+      }
+    });
   };
 
   return (
@@ -66,13 +66,15 @@ export default function Home() {
           }}
           className="absolute bg-white rounded-t-2xl p-6 shadow-lg"
         >
-          {!selectedGrade ? (
+          {!grade ? (
             <>
               <Text className="text-xl font-bold text-center mb-4">
                 Select Grade
               </Text>
               <TouchableOpacity
-                onPress={() => handleGradeSelect("11")}
+                onPress={() => {
+                  setGrade("11");
+                }}
                 className="p-3 rounded-lg bg-gray-200 mb-2"
               >
                 <Text className="text-center text-base">
@@ -80,7 +82,9 @@ export default function Home() {
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => handleGradeSelect("12")}
+                onPress={() => {
+                  setGrade("12");
+                }}
                 className="p-3 rounded-lg bg-gray-200 mb-2"
               >
                 <Text className="text-center text-base">
@@ -94,13 +98,17 @@ export default function Home() {
                 Select Subject
               </Text>
               <TouchableOpacity
-                onPress={() => handleSubjectSelect("english")}
+                onPress={() => {
+                  handleNavigateToChapters("english", grade);
+                }}
                 className="p-3 rounded-lg bg-gray-200 mb-2"
               >
                 <Text className="text-center text-base">English</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => handleSubjectSelect("nepali")}
+                onPress={() => {
+                  handleNavigateToChapters("nepali", grade);
+                }}
                 className="p-3 rounded-lg bg-gray-200 mb-2"
               >
                 <Text className="text-center text-base">Nepali</Text>
