@@ -1,42 +1,12 @@
-import {
-  DarkTheme,
-  DefaultTheme,
-  Theme,
-} from "@react-navigation/native";
-
-export const LightTheme: Theme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: "#0066cc",
-    background: "#ffffff",
-    card: "#0066cc",
-    // card: "#ffffff",
-    text: "#000000",
-    border: "#e0e0e0",
-  },
-};
-
-export const DarkThemeCustom: Theme = {
-  ...DarkTheme,
-  colors: {
-    ...DarkTheme.colors,
-    primary: "#0a84ff",
-    background: "#000000",
-    card: "#0a84ff",
-    // card: "#1c1c1e",
-    text: "#ffffff",
-    border: "#272729",
-  },
-};
+import { DefaultTheme, Theme } from "@react-navigation/native";
 
 export const RedTheme: Theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: "#ff0000",
+    primary: "#FF0101",
     background: "#fff5f5",
-    card: "#ff0000",
+    card: "#FF0101",
     // card: "#ffeaea",
     text: "#800000",
     border: "#ffcccc",
@@ -47,9 +17,9 @@ export const YellowTheme: Theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: "#ffff00",
+    primary: "#FFEA01",
     background: "#fffff0",
-    card: "#ffff00",
+    card: "#FFEA01",
     // card: "#fffde7",
     text: "#666600",
     border: "#f0e68c",
@@ -60,9 +30,9 @@ export const GreenTheme: Theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: "#00ff00",
+    primary: "#64E500",
     background: "#f0fff0",
-    card: "#00ff00",
+    card: "#64E500",
     // card: "#e0ffe0",
     text: "#006600",
     border: "#ccffcc",
@@ -73,9 +43,9 @@ export const CyanTheme: Theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: "#00ffff",
+    primary: "#00E1FF",
     background: "#f0ffff",
-    card: "#00ffff",
+    card: "#00E1FF",
     // card: "#e0ffff",
     text: "#006666",
     border: "#ccffff",
@@ -86,9 +56,9 @@ export const BlueTheme: Theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: "#0000ff",
+    primary: "#0073FF",
     background: "#f0f4ff",
-    card: "#0000ff",
+    card: "#0073FF",
     // card: "#e0e7ff",
     text: "#000066",
     border: "#ccd9ff",
@@ -99,9 +69,9 @@ export const NavyTheme: Theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: "#004080",
+    primary: "#025397",
     background: "#f0f4ff",
-    card: "#004080",
+    card: "#025397",
     // card: "#e0e7ff",
     text: "#002040",
     border: "#ccd9ff",
@@ -112,11 +82,24 @@ export const PurpleTheme: Theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: "#8000ff",
+    primary: "#7B00FF",
     background: "#faf5ff",
-    card: "#8000ff",
+    card: "#7B00FF",
     // card: "#f0e6ff",
-    text: "#400080",
+    text: "#450040",
+    border: "#e0ccff",
+  },
+};
+
+export const Purple2Theme: Theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: "#90F",
+    background: "#f5f0ff",
+    card: "#90F",
+    // card: "#f0e6ff",
+    text: "#600060",
     border: "#e0ccff",
   },
 };
@@ -125,11 +108,11 @@ export const MagentaTheme: Theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: "#ff00ff",
+    primary: "#FF00B7",
     background: "#fff0ff",
-    card: "#ff00ff",
+    card: "#FF00B7",
     // card: "#ffe0ff",
-    text: "#800080",
+    text: "#800040",
     border: "#ffccff",
   },
 };
@@ -138,9 +121,9 @@ export const PinkTheme: Theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: "#ff007f",
+    primary: "#FF0166",
     background: "#fff0f5",
-    card: "#ff007f",
+    card: "#FF0166",
     // card: "#ffe0eb",
     text: "#800040",
     border: "#ffcce0",
