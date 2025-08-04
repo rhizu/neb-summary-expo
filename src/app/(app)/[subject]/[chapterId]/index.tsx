@@ -8,8 +8,10 @@ import {
 
 import Header from "@/components/Header";
 import { notes, Subject, subjectToHeadingMap } from "@/lib/notes";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function NotePage() {
+  const { bottom } = useSafeAreaInsets();
   const { subject, chapterId } = useLocalSearchParams<{
     subject: Subject;
     chapterId: string;
@@ -41,49 +43,58 @@ export default function NotePage() {
   return (
     <View className="flex flex-col flex-1 bg-gray-200">
       <Header title={subjectToHeadingMap[subject].name} />
-      <View className="w-full p-5 h-full relative">
-        <View className="p-2 bg-white rounded-xl h-3/4 w-full overflow-hidden">
-          <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-            <View className="flex flex-col justify-center items-center p-2 gap-2">
-              <Text className="font-bold">{chapter.name}</Text>
-              <View>
-                <Text className="text-left">
-                  {chapter.note || "Note not found."}
-                </Text>
+      <View
+        className="flex-1"
+        style={{
+          paddingBottom: !bottom ? 12 : bottom, // Add padding to avoid overlap with the bottom safe area
+        }}
+      >
+        <View className="p-5 flex-1 pb-0">
+          <View className="p-2 bg-white rounded-xl flex-1">
+            <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+              <View className="flex flex-col justify-center items-center p-2 gap-2">
+                <Text className="font-bold">{chapter.name}</Text>
+                <View>
+                  <Text className="text-left">
+                    {chapter.note || "Note not found."}
+                  </Text>
+                </View>
               </View>
-            </View>
-          </ScrollView>
+            </ScrollView>
+          </View>
+          <View className="flex-row gap-x-4 mt-4">
+            {previousChapterId && (
+              <TouchableOpacity
+                className="bg-blue-900 py-3 rounded-lg items-center flex-1 self-center"
+                onPress={() =>
+                  router.replace({
+                    pathname: "/[subject]/[chapterId]",
+                    params: { subject, chapterId: previousChapterId },
+                  })
+                }
+              >
+                <Text className="text-white text-base font-bold">
+                  Previous Chapter
+                </Text>
+              </TouchableOpacity>
+            )}
+            {nextChapterId && (
+              <TouchableOpacity
+                className="bg-blue-900 py-3 rounded-lg items-center flex-1 self-center"
+                onPress={() =>
+                  router.replace({
+                    pathname: "/[subject]/[chapterId]",
+                    params: { subject, chapterId: nextChapterId },
+                  })
+                }
+              >
+                <Text className="text-white text-base font-bold">
+                  Next Chapter
+                </Text>
+              </TouchableOpacity>
+            )}
+          </View>
         </View>
-        {previousChapterId && (
-          <TouchableOpacity
-            className="mt-5 bg-blue-900 py-3 rounded-lg items-center w-full self-center"
-            onPress={() =>
-              router.replace({
-                pathname: "/[subject]/[chapterId]",
-                params: { subject, chapterId: previousChapterId },
-              })
-            }
-          >
-            <Text className="text-white text-base font-bold">
-              Previous Chapter
-            </Text>
-          </TouchableOpacity>
-        )}
-        {nextChapterId && (
-          <TouchableOpacity
-            className="mt-5 bg-blue-900 py-3 rounded-lg items-center w-full self-center"
-            onPress={() =>
-              router.replace({
-                pathname: "/[subject]/[chapterId]",
-                params: { subject, chapterId: nextChapterId },
-              })
-            }
-          >
-            <Text className="text-white text-base font-bold">
-              Next Chapter
-            </Text>
-          </TouchableOpacity>
-        )}
       </View>
     </View>
   );

@@ -8,7 +8,7 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { DrawerItem } from "@react-navigation/drawer";
 import { router } from "expo-router";
 import Drawer from "expo-router/drawer";
-import { Text, View } from "react-native";
+import { Share, Text, View } from "react-native";
 
 export default function RootLayout() {
   return (
@@ -35,17 +35,35 @@ function DrawerContent() {
       </View>
       <View className="p-2.5">
         <DrawerItem
-          icon={() => <Feather name="info" size={24} color="black" />}
+          icon={({ focused, color, size }) => (
+            <Feather
+              name="home"
+              size={size}
+              color={focused ? "#005198" : color || "black"}
+            />
+          )}
+          label="Home"
+          href="/[subject]"
+          onPress={() => router.push("/")}
+        />
+        <DrawerItem
+          icon={({ focused, color, size }) => (
+            <Feather
+              name="info"
+              size={size}
+              color={focused ? "#005198" : color || "black"}
+            />
+          )}
           label="About Us"
           href="/about"
           onPress={() => router.push("/about")}
         />
         <DrawerItem
-          icon={() => (
+          icon={({ focused, color, size }) => (
             <MaterialCommunityIcons
               name="shape-outline"
-              size={24}
-              color="black"
+              size={size}
+              color={focused ? "#005198" : color || "black"}
             />
           )}
           label="Theme"
@@ -53,11 +71,11 @@ function DrawerContent() {
           onPress={() => router.push("/theme")}
         />
         <DrawerItem
-          icon={() => (
+          icon={({ focused, color, size }) => (
             <FontAwesome5
               name="graduation-cap"
-              size={24}
-              color="black"
+              size={size}
+              color={focused ? "#005198" : color || "black"}
             />
           )}
           label="Switch Grade"
@@ -68,31 +86,45 @@ function DrawerContent() {
           }}
         />
         <DrawerItem
-          icon={() => (
-            <MaterialIcons name="security" size={24} color="black" />
+          icon={({ focused, color, size }) => (
+            <MaterialIcons
+              name="security"
+              size={size}
+              color={focused ? "#005198" : color || "black"}
+            />
           )}
           label="Privacy Policy"
           href="/privacy"
           onPress={() => router.push("/privacy")}
         />
         <DrawerItem
-          icon={() => (
-            <FontAwesome5 name="headset" size={24} color="black" />
+          icon={({ focused, color, size }) => (
+            <FontAwesome5
+              name="headset"
+              size={size}
+              color={focused ? "#005198" : color || "black"}
+            />
           )}
           label="Help and Support"
           href="/help"
           onPress={() => router.push("/help")}
         />
         <DrawerItem
-          icon={() => (
+          icon={({ focused, color, size }) => (
             <FontAwesome
               name="share-square-o"
-              size={24}
-              color="black"
+              size={size}
+              color={focused ? "#005198" : color || "black"}
             />
           )}
           label="Tell Your Friends"
-          onPress={() => {}}
+          onPress={() => {
+            Share.share({
+              message:
+                "Check out the NEB Summary app for easy learning!",
+              url: "https://example.com",
+            });
+          }}
         />
       </View>
     </View>
