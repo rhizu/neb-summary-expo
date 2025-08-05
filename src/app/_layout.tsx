@@ -17,6 +17,7 @@ export default function RootLayout() {
         <Stack
           screenOptions={{
             headerShown: false,
+            headerTitleAlign: "center",
             headerTintColor: "#fff",
           }}
         >
@@ -24,10 +25,22 @@ export default function RootLayout() {
             name="index"
             options={{
               animation: "fade",
+              title: "Choose Subject",
             }}
           />
-          <Stack.Screen name="(drawer)" />
-          <Stack.Screen name="notes/[chapterId]/index" />
+          <Stack.Screen
+            name="(drawer)"
+            options={{
+              animation: "slide_from_right",
+              title: "Chapters",
+            }}
+          />
+          <Stack.Screen
+            name="notes/[chapterId]/index"
+            options={{
+              title: "Notes",
+            }}
+          />
         </Stack>
       </GestureHandlerRootView>
     </ThemeProvider>

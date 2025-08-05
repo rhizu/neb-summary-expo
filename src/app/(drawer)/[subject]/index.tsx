@@ -25,6 +25,7 @@ export default function ChapterListScreen() {
     <>
       <TouchableNativeOrHighlightOrOpacity
         accessibilityRole="button"
+        noSwipe
         underlayColor={"#ddd"}
         onPress={() => {
           router.push({

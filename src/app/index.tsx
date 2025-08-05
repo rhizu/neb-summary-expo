@@ -5,31 +5,35 @@ import { usePersistedBearStore } from "@/store";
 import { useTheme } from "@react-navigation/native";
 import { router } from "expo-router";
 import { Text, View } from "react-native";
-import Animated, { SlideInDown } from "react-native-reanimated";
+import Animated, {
+  FadeIn,
+  FadeOut,
+  SlideInDown,
+} from "react-native-reanimated";
+
+const subjectEntries = Object.entries(subjectToHeadingMap) as [
+  Subject,
+  (typeof subjectToHeadingMap)[Subject],
+][];
+
+const handleNavigateToChapters = (
+  subject: (typeof subjectToHeadingMap)[Subject]["subject"],
+  grade: (typeof subjectToHeadingMap)[Subject]["grade"]
+) => {
+  subjectEntries.forEach(([key, value]) => {
+    if (value.grade === grade && value.subject === subject) {
+      router.replace({
+        pathname: "/(drawer)/[subject]",
+        params: { subject: key },
+      });
+    }
+  });
+};
 
 export default function SelectGradeAndSubjectScreen() {
   const { colors } = useTheme();
   const grade = usePersistedBearStore((state) => state.grade);
   const setGrade = usePersistedBearStore((state) => state.setGrade);
-
-  const subjectEntries = Object.entries(subjectToHeadingMap) as [
-    Subject,
-    (typeof subjectToHeadingMap)[Subject],
-  ][];
-
-  const handleNavigateToChapters = (
-    subject: (typeof subjectToHeadingMap)[Subject]["subject"],
-    grade: (typeof subjectToHeadingMap)[Subject]["grade"]
-  ) => {
-    subjectEntries.forEach(([key, value]) => {
-      if (value.grade === grade && value.subject === subject) {
-        router.replace({
-          pathname: "/(drawer)/[subject]",
-          params: { subject: key },
-        });
-      }
-    });
-  };
 
   return (
     <>
@@ -44,7 +48,10 @@ export default function SelectGradeAndSubjectScreen() {
           className="w-full bg-white rounded-t-2xl p-6 py-12 shadow-lg"
         >
           {!grade ? (
-            <>
+            <Animated.View
+              entering={FadeIn.delay(200)}
+              exiting={FadeOut}
+            >
               <Text className="text-3xl font-bold text-center mb-4">
                 Select Grade
               </Text>
@@ -60,28 +67,38 @@ export default function SelectGradeAndSubjectScreen() {
                   setGrade("12");
                 }}
               />
-            </>
+            </Animated.View>
           ) : (
-            <>
-              <Text className="text-3xl font-bold text-center mb-4">
-                Select Subject
-              </Text>
-              <AppButton
-                title={"English"}
-                onPress={() => {
-                  handleNavigateToChapters("english", grade);
-                }}
-              />
-              <AppButton
-                title={"Nepali"}
-                onPress={() => {
-                  handleNavigateToChapters("nepali", grade);
-                }}
-              />
-            </>
+            <GradeSelector grade={grade} />
           )}
         </Animated.View>
       </View>
     </>
+  );
+}
+
+function GradeSelector({
+  grade,
+}: {
+  grade: (typeof subjectToHeadingMap)[Subject]["grade"];
+}) {
+  return (
+    <Animated.View entering={FadeIn.delay(200)} exiting={FadeOut}>
+      <Text className="text-3xl font-bold text-center mb-4">
+        Select Subject
+      </Text>
+      <AppButton
+        title={"English"}
+        onPress={() => {
+          handleNavigateToChapters("english", grade);
+        }}
+      />
+      <AppButton
+        title={"Nepali"}
+        onPress={() => {
+          handleNavigateToChapters("nepali", grade);
+        }}
+      />
+    </Animated.View>
   );
 }

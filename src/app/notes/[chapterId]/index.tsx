@@ -4,14 +4,16 @@ import {
   Stack,
   useLocalSearchParams,
 } from "expo-router";
-import { ScrollView, Text, View } from "react-native";
+import { Platform, ScrollView, Text, View } from "react-native";
 
 import AppButton from "@/components/AppButton";
 import { chapters } from "@/lib/notes";
+import { useTheme } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function NotePage() {
   const { bottom } = useSafeAreaInsets();
+  const { colors } = useTheme();
   const { chapterId } = useLocalSearchParams<{
     chapterId: string;
   }>();
@@ -57,10 +59,26 @@ export default function NotePage() {
         name="[chapterId]/index"
         options={{
           headerShown: true,
+          animation: Platform.select({
+            ios: "flip",
+            android: "fade_from_bottom",
+          }),
+          headerBackground: () => (
+            <View
+              style={{
+                flex: 1,
+                backgroundColor: colors.primary,
+                borderBottomLeftRadius: 16,
+                borderBottomRightRadius: 16,
+                overflow: "hidden",
+              }}
+            />
+          ),
+          headerTintColor: "#fff",
           headerTitle: chapter.name,
         }}
       />
-      <View className="flex flex-col flex-1 bg-gray-200">
+      <View className="flex flex-1 bg-gray-200">
         <View
           className="flex-1"
           style={{
@@ -71,9 +89,11 @@ export default function NotePage() {
             <View className="p-2 bg-white rounded-xl flex-1">
               <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
                 <View className="flex flex-col justify-center items-center p-2 gap-2">
-                  <Text className="font-bold">{chapter.name}</Text>
+                  <Text className="font-bold text-2xl">
+                    {chapter.name}
+                  </Text>
                   <View>
-                    <Text className="text-left">
+                    <Text className="text-left text-base">
                       {chapter.note || "Note not found."}
                     </Text>
                   </View>

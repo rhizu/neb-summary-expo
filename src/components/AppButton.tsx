@@ -45,9 +45,9 @@ export default function AppButton({
           false
         )}
       >
-        <View pointerEvents="box-only" className={`w-full p-3`}>
+        <View pointerEvents="box-only" className={`w-full p-3 py-4`}>
           <Text
-            className={`text-center text-lg font-bold text-white`}
+            className={`text-center text-xl font-bold text-white`}
           >
             {title}
           </Text>

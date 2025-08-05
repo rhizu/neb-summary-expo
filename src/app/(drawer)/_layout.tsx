@@ -10,15 +10,19 @@ import {
 import { useTheme } from "@react-navigation/native";
 import { router } from "expo-router";
 import Drawer from "expo-router/drawer";
-import { Share, Text, View } from "react-native";
+import { Platform, Share, Text, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function RootLayout() {
   return (
     <Drawer
       drawerContent={DrawerContent}
       screenOptions={{
-        drawerType: "front",
         headerTintColor: "#fff",
+        headerStyle: {
+          borderBottomLeftRadius: 16,
+          borderBottomRightRadius: 16,
+        },
       }}
     >
       <Drawer.Screen
@@ -103,6 +107,7 @@ export default function RootLayout() {
 function DrawerContent(props: DrawerContentComponentProps) {
   const setGrade = usePersistedBearStore((state) => state.setGrade);
   const { colors } = useTheme();
+  const { top } = useSafeAreaInsets();
 
   return (
     <View
@@ -113,7 +118,10 @@ function DrawerContent(props: DrawerContentComponentProps) {
     >
       <View
         className="pt-[41px] pb-[27px] rounded-br-[25px] justify-center items-center"
-        style={{ backgroundColor: colors.primary }}
+        style={{
+          backgroundColor: colors.primary,
+          paddingTop: (Platform.OS === "web" ? 0 : top) + 24,
+        }}
       >
         <View className="flex-row items-center justify-center gap-2.5">
           <Logo width={40} height={52} />
@@ -123,7 +131,7 @@ function DrawerContent(props: DrawerContentComponentProps) {
       <DrawerContentScrollView
         {...props}
         contentContainerStyle={{
-          padding: 0,
+          paddingTop: 12,
         }}
       >
         <DrawerItem
