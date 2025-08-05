@@ -53,7 +53,7 @@ export const usePersistedBearStore = create<{
       name: "food-storage",
       storage:
         Platform.OS === "web"
-          ? undefined
+          ? createJSONStorage(() => localStorage)
           : createJSONStorage(() => AsyncStorage),
     }
   )

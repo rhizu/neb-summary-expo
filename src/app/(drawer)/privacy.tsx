@@ -7,7 +7,7 @@ export default function NotePage() {
       <View className="w-full p-5 h-full">
         <View className="p-2 bg-white rounded-xl h-1/2 w-full overflow-hidden">
           <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-            <View className="flex flex-col justify-center items-center p-2 gap-2">
+            <View className="flex justify-center items-center p-2 gap-2">
               <Text className="text-left">
                 Lorem ipsum dolor sit amet consectetur adipisicing
                 elit. Id explicabo debitis quisquam quia maiores
