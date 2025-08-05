@@ -48,10 +48,7 @@ export default function SelectGradeAndSubjectScreen() {
           className="w-full bg-white rounded-t-2xl p-6 py-12 shadow-lg"
         >
           {!grade ? (
-            <Animated.View
-              entering={FadeIn.delay(200)}
-              exiting={FadeOut}
-            >
+            <Animated.View exiting={FadeOut}>
               <Text className="text-3xl font-bold text-center mb-4">
                 Select Grade
               </Text>
