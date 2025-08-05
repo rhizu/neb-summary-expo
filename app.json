@@ -11,7 +11,7 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.hamronotes.nebsummary"
+      "bundleIdentifier": "com.nymna.nebsummary"
     },
     "android": {
       "adaptiveIcon": {
@@ -19,7 +19,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.hamronotes.nebsummary"
+      "package": "com.nymna.nebsummary"
     },
     "web": {
       "bundler": "metro",
@@ -31,10 +31,14 @@
       [
         "expo-splash-screen",
         {
-          "image": "./src/assets/images/splash-icon.png",
-          "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "imageWidth": 200,
+          "image": "./src/assets/images/splash-icon.png",
+          "backgroundColor": "#ffffff",
+          "dark": {
+            "image": "./src/assets/images/splash-icon.png",
+            "backgroundColor": "#000000"
+          }
         }
       ]
     ],

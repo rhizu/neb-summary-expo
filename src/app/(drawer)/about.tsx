@@ -1,38 +1,35 @@
 import Nymnalogo from "@/assets/logo/Nymna.svg";
-import { ScrollView, Text, View } from "react-native";
+import { Text, View } from "react-native";
 
-export default function NotePage() {
+export default function AboutUsScreen() {
   return (
-    <View className="flex flex-col flex-1 bg-gray-200">
-      <View className="p-5 h-full relative">
-        <View className="p-2 bg-white rounded-xl h-1/2">
-          <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-            <View className="flex justify-center items-center p-2 gap-2">
-              <Text className="font-bold text-2xl">NEB SUMMARY</Text>
-              <View>
-                <Text className="text-left">
-                  Lorem ipsum dolor sit amet consectetur adipisicing
-                  elit. Id explicabo debitis quisquam quia maiores
-                  corrupti dignissimos, aliquid voluptatem, voluptas
-                  possimus autem. Consequuntur, dolore? Tempora
-                  adipisci necessitatibus nihil! Vitae facere soluta
-                  assumenda harum dolorem accusantium a perspiciatis
-                  aliquid tenetur illo fugit reprehenderit corporis
-                  maiores, earum error iure in! Vel possimus, ad
-                  fugiat expedita corporis ex excepturi doloribus
-                  praesentium aliquid sint, officia unde, similique
-                  iste dignissimos voluptatem itaque illum? Voluptatem
-                  delectus laboriosam perferendis debitis soluta vel
-                  laudantium a quidem atque quia dignissimos, ipsa ad
-                  aut ut labore! Adipisci, repudiandae hic officiis
-                  animi deleniti amet quisquam blanditiis neque harum
-                  illum, voluptatem possimus! Consequatur?
-                </Text>
-              </View>
+    <View className="flex-1 bg-gray-200">
+      <View className="p-5 flex-1 justify-between">
+        <View className="p-2 bg-white rounded-xl">
+          <View className="flex justify-center items-center p-2 gap-2">
+            <Text className="font-bold text-2xl">NEB SUMMARY</Text>
+            <View>
+              <Text className="text-left">
+                We are Nymna Technology, creators of HamroCSIT,
+                HamroNotes, and other educational platforms built to
+                simplify learning.
+              </Text>
+              <Text className="text-left mt-2">
+                This app was made for Grades 11 and 12 a clean summary
+                app to help students focus on what matters. Our goal
+                is to support +2 students in doing their best in their
+                exams.
+              </Text>
+              <Text className="text-left mt-2">
+                With 20M+ views, 60K+ users, and 5,000+ active
+                learners across our platforms , we're committed to
+                improving based on your feedback and driving
+                educational change in Nepal.
+              </Text>
             </View>
-          </ScrollView>
+          </View>
         </View>
-        <View className="absolute bottom-36 left-0 right-0 items-center">
+        <View className="items-center mb-4">
           <Nymnalogo width={100} height={100} />
         </View>
       </View>
