@@ -4,11 +4,12 @@ import { Subject, subjectToHeadingMap } from "@/lib/notes";
 import { usePersistedBearStore } from "@/store";
 import { useTheme } from "@react-navigation/native";
 import { router } from "expo-router";
-import { Text, View } from "react-native";
+import { Dimensions, Text, View } from "react-native";
 import Animated, {
+  Easing,
   FadeIn,
   FadeOut,
-  SlideInDown,
+  Keyframe,
 } from "react-native-reanimated";
 
 const subjectEntries = Object.entries(subjectToHeadingMap) as [
@@ -30,6 +31,16 @@ const handleNavigateToChapters = (
   });
 };
 
+const { height } = Dimensions.get("window");
+
+const slideInDown = new Keyframe({
+  0: { transform: [{ translateY: height }] },
+  100: {
+    transform: [{ translateY: 0 }],
+    easing: Easing.bezier(0.4, 0.0, 0.2, 1),
+  },
+});
+
 export default function SelectGradeAndSubjectScreen() {
   const { colors } = useTheme();
   const grade = usePersistedBearStore((state) => state.grade);
@@ -44,7 +55,9 @@ export default function SelectGradeAndSubjectScreen() {
         <View className="flex-1" />
         <LogoAnimation />
         <Animated.View
-          entering={SlideInDown.delay(500).duration(1000)}
+          style={{
+            transform: [{ translateY: height }]          }}
+          entering={slideInDown.delay(750).duration(500)}
           className="w-full bg-white rounded-t-2xl p-6 py-12 shadow-lg"
         >
           {!grade ? (
