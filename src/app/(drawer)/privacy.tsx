@@ -1,5 +1,5 @@
 import Nymnalogo from "@/assets/logo/Nymna.svg";
-import { ScrollView, Text, View } from "react-native";
+import { Linking, ScrollView, Text, View } from "react-native";
 
 export default function PrivacyPolicyScreen() {
   return (
@@ -65,8 +65,17 @@ export default function PrivacyPolicyScreen() {
               <Text className="font-bold">Contact Us</Text>
               <Text>
                 If you have any questions or concerns about this
-                Privacy Policy, feel free to contact us:
-                info@nymna.com
+                Privacy Policy, feel free to contact us:{" "}
+                <Text
+                  className="text-blue-600 underline"
+                  onPress={() => {
+                    Linking.openURL(
+                      "mailto:nymnatechnology@gmail.com"
+                    );
+                  }}
+                >
+                  nymnatechnology@gmail.com
+                </Text>
               </Text>
             </View>
           </ScrollView>

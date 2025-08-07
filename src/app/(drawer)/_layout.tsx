@@ -117,7 +117,7 @@ function DrawerContent(props: DrawerContentComponentProps) {
       }}
     >
       <View
-        className="pt-[41px] pb-[27px] rounded-br-[25px] justify-center items-center"
+        className="pt-[41px] pb-[27px] justify-center items-center"
         style={{
           backgroundColor: colors.primary,
           paddingTop: (Platform.OS === "web" ? 0 : top) + 24,

@@ -66,7 +66,9 @@ export default function HelpScreen() {
           <Text className="text-center text-base mb-2">OR</Text>
           <AppButton
             title="Send Email"
-            onPress={() => Linking.openURL("mailto:info@nynma.com")}
+            onPress={() =>
+              Linking.openURL("mailto:nymnatechnology@gmail.com")
+            }
             className="bg-blue-800"
           />
         </View>
